@@ -1,0 +1,348 @@
+/* Terroir de France — application layer.
+   Every value below comes from the maquette; the inline styles of the
+   design file are lifted into named classes so the markup stays legible.
+   Colours, spacing and type still resolve through the Classical tokens. */
+
+:root {
+  /* Product families — one hue per type of fiche, plus its paper tint. */
+  --tdf-fromage: oklch(63% .10 78);      --tdf-fromage-t: oklch(95.5% .028 78);
+  --tdf-plat: oklch(56% .11 38);         --tdf-plat-t: oklch(95.5% .03 38);
+  --tdf-dessert: oklch(52% .085 350);    --tdf-dessert-t: oklch(95.5% .028 350);
+  --tdf-charcuterie: oklch(47% .095 20); --tdf-charcuterie-t: oklch(95.5% .028 20);
+
+  /* Region families — the medallion strokes on the atlas. */
+  --tdf-nordest: oklch(58% .095 65);
+  --tdf-ouest: oklch(53% .065 210);
+  --tdf-centre: oklch(52% .085 350);
+  --tdf-sudouest: oklch(56% .11 38);
+  --tdf-midi: oklch(54% .08 132);
+
+  /* Le tracé de la carte, et le voile du dialogue du design system. */
+  --tdf-map-fill: oklch(96.5% .014 80);
+  --tdf-map-stroke: oklch(72% .04 80);
+  --tdf-scrim: color-mix(in srgb, var(--color-neutral-900) 50%, transparent);
+}
+
+@keyframes tdf-in { from { opacity: 0; transform: translateY(6px) } to { opacity: 1; transform: none } }
+
+body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body) }
+a { color: var(--color-accent-700); text-decoration: none }
+a:hover { color: var(--color-accent-600); text-decoration: underline }
+button { font-family: inherit; color: inherit }
+
+.tnum { font-feature-settings: 'tnum' }
+
+.app { min-height: 100vh; display: flex; flex-direction: column }
+/* The view slot carries the page's growth so the footer stays at the bottom. */
+.app > main { flex: 1; display: flex; flex-direction: column }
+.app > main:focus { outline: none }
+
+/* ── header ─────────────────────────────────────────────────────────── */
+
+.tdf-header {
+  display: flex; align-items: center; gap: var(--space-6);
+  padding: 14px var(--space-8);
+  border-bottom: 1px solid var(--color-divider);
+  background: var(--color-bg);
+  position: sticky; top: 0; z-index: 5;
+}
+.tdf-brand {
+  display: flex; align-items: baseline; gap: 10px;
+  background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
+}
+.tdf-brand-name { font-family: var(--font-heading); font-size: 23px; letter-spacing: .01em }
+.tdf-brand-sub {
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--color-neutral-600); font-feature-settings: 'tnum';
+}
+.tdf-spacer { flex: 1 }
+.tdf-search { position: relative; width: 300px }
+.tdf-search .input { width: 100%; font-size: 13px; padding-left: var(--space-3) }
+.tdf-search-clear {
+  position: absolute; right: 6px; top: 6px;
+  background: none; border: 0; cursor: pointer;
+  font-size: 15px; line-height: 1; color: var(--color-neutral-600); padding: 4px 6px;
+}
+.tdf-theme {
+  flex: none; width: 32px; height: 32px; padding: 0;
+  color: var(--color-neutral-600); border-color: transparent;
+}
+.tdf-theme:hover { color: var(--color-accent-700); background: color-mix(in srgb, var(--color-accent) 10%, transparent) }
+.tdf-theme svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6;
+  stroke-linecap: round; stroke-linejoin: round }
+/* Un seul des deux jeux d'icônes est visible : celui du thème vers lequel on bascule. */
+.tdf-theme .icon-moon { display: block }
+.tdf-theme .icon-sun { display: none }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .tdf-theme .icon-moon { display: none }
+  :root:not([data-theme='light']) .tdf-theme .icon-sun { display: block }
+}
+:root[data-theme='dark'] .tdf-theme .icon-moon { display: none }
+:root[data-theme='dark'] .tdf-theme .icon-sun { display: block }
+:root[data-theme='light'] .tdf-theme .icon-moon { display: block }
+:root[data-theme='light'] .tdf-theme .icon-sun { display: none }
+
+.tdf-total {
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--color-neutral-600); font-feature-settings: 'tnum'; white-space: nowrap;
+}
+
+/* ── shared editorial furniture ─────────────────────────────────────── */
+
+.tdf-kicker {
+  font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--color-accent-700); margin: 0 0 var(--space-2);
+}
+.tdf-kicker-muted { color: var(--color-neutral-600) }
+.tdf-rule { height: 3px; width: 120px; margin: 0 0 var(--space-4) }
+.tdf-back {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--color-accent-700);
+}
+.tdf-back-muted { color: var(--color-neutral-600) }
+.tdf-section-title {
+  font-family: var(--font-heading); font-weight: 400; font-size: 15px;
+  letter-spacing: .16em; text-transform: uppercase;
+  margin: 0 0 var(--space-3); color: var(--color-neutral-700);
+}
+.tdf-enter { animation: tdf-in .35s ease both }
+
+/* Cards used as buttons keep the .card look but must stretch their children. */
+.card-btn { cursor: pointer; text-align: left; align-items: stretch; width: 100% }
+.card-btn:hover { box-shadow: var(--shadow-sm) }
+.card-kicker-row { display: flex; justify-content: space-between; gap: var(--space-2); font-feature-settings: 'tnum' }
+.card-kicker-row .muted { color: var(--color-neutral-600) }
+.card-title-lg { font-size: 24px; font-weight: 400 }
+.card-title-md { font-size: 23px; font-weight: 400 }
+.card-title-sm { font-size: 21px; font-weight: 400 }
+.card-body { line-height: 1.6; color: var(--color-neutral-800); opacity: 1 }
+
+.tdf-grid { display: grid; gap: var(--space-4) }
+.tdf-grid-285 { grid-template-columns: repeat(auto-fill, minmax(285px, 1fr)) }
+.tdf-grid-300 { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) }
+
+/* ── search view ────────────────────────────────────────────────────── */
+
+.tdf-main-narrow {
+  flex: 1; padding: var(--space-8) var(--space-8) 55px;
+  max-width: 1180px; margin: 0 auto; width: 100%;
+}
+.tdf-search-title {
+  font-family: var(--font-heading); font-weight: 400; font-size: 40px;
+  margin: 0 0 var(--space-1); letter-spacing: .005em;
+}
+.tdf-search-count {
+  margin: 0 0 var(--space-6); font-size: 13px;
+  color: var(--color-neutral-700); font-feature-settings: 'tnum';
+}
+.tdf-empty {
+  margin: 0; padding: var(--space-8) 0; font-size: 15px; line-height: 1.75;
+  color: var(--color-neutral-700); max-width: 56ch;
+}
+
+/* ── atlas view ─────────────────────────────────────────────────────── */
+
+.tdf-atlas { flex: 1; display: grid; grid-template-columns: minmax(520px, 1fr) 330px; align-items: stretch }
+.tdf-atlas-main { padding: var(--space-8) var(--space-8) 46px; min-width: 0 }
+.tdf-atlas-title {
+  font-family: var(--font-heading); font-weight: 400; font-size: 44px;
+  line-height: 1.06; margin: 0 0 var(--space-3); max-width: 14ch;
+}
+.tdf-atlas-lede {
+  margin: 0 0 var(--space-6); max-width: 56ch; font-size: 14.5px; line-height: 1.7;
+  text-align: justify; text-wrap: pretty; color: var(--color-neutral-800);
+}
+.tdf-map {
+  position: relative; aspect-ratio: 1 / .95; width: 100%; max-width: 820px; margin: 0 auto;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-lg); background: var(--color-bg);
+}
+.tdf-map > svg { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: var(--radius-lg) }
+.tdf-map > svg path { fill: var(--tdf-map-fill); stroke: var(--tdf-map-stroke) }
+.tdf-map-label {
+  position: absolute; left: 14px; font-size: 9.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--color-neutral-700);
+}
+.tdf-map-label-n { top: 12px }
+.tdf-map-label-s { bottom: 12px }
+
+.tdf-pin {
+  position: absolute; transform: translate(-50%, -50%);
+  width: 15.5%; aspect-ratio: 1; border-radius: 50%;
+  border: 1.5px solid var(--tdf-col); background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; padding: 8px;
+}
+.tdf-pin:hover { box-shadow: var(--shadow-md); background: color-mix(in srgb, var(--tdf-col) 12%, var(--color-bg)) }
+.tdf-pin-sm { width: 13.5% }
+.tdf-pin-name {
+  font-family: var(--font-heading); font-size: clamp(10px, 1.3vw, 12.5px);
+  line-height: 1.12; text-align: center; text-wrap: balance;
+}
+.tdf-pin-count {
+  font-size: clamp(9px, 1vw, 10px); letter-spacing: .14em;
+  color: var(--tdf-col); font-feature-settings: 'tnum';
+}
+
+.tdf-aside {
+  border-left: 1px solid var(--color-divider);
+  padding: var(--space-8) var(--space-6) 46px;
+  display: flex; flex-direction: column; gap: var(--space-6);
+  background: var(--color-neutral-100);
+}
+.tdf-types { display: flex; flex-wrap: wrap; gap: var(--space-2) }
+.tdf-type {
+  cursor: pointer; border-width: 1px; border-style: solid;
+  font-feature-settings: 'tnum';
+  border-color: var(--tdf-col); color: var(--tdf-fg); background: var(--tdf-bg);
+}
+.tdf-type:hover { box-shadow: var(--shadow-sm) }
+.tdf-type[aria-pressed='true'] { font-weight: 600 }
+
+.tdf-daily { border-left: 3px solid var(--tdf-col) }
+.tdf-daily:hover { box-shadow: var(--shadow-md) }
+.tdf-filter-label { margin: 0 0 var(--space-3); font-size: 12px; color: var(--color-neutral-600); font-feature-settings: 'tnum' }
+.tdf-region-rows { display: flex; flex-direction: column }
+.tdf-region-row {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-2) var(--space-1);
+  background: none; border: 0; border-bottom: 1px solid var(--color-divider);
+  cursor: pointer; text-align: left; width: 100%;
+}
+.tdf-region-row:hover { background: color-mix(in srgb, var(--color-neutral-300) 45%, transparent) }
+.tdf-region-row-name { display: flex; align-items: center; gap: var(--space-2) }
+.tdf-dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--tdf-col) }
+.tdf-region-row-name span:last-child { font-family: var(--font-heading); font-size: 16px }
+.tdf-region-row-count { font-size: 11px; letter-spacing: .12em; color: var(--color-neutral-600); font-feature-settings: 'tnum' }
+
+/* ── region view ────────────────────────────────────────────────────── */
+
+.tdf-main-region { flex: 1; padding: var(--space-6) var(--space-8) 55px; max-width: 1180px; margin: 0 auto; width: 100% }
+.tdf-region-head { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 46px; align-items: start }
+.tdf-region-title { font-family: var(--font-heading); font-weight: 400; font-size: 52px; line-height: 1.04; margin: 0 0 var(--space-3) }
+.tdf-region-desc {
+  margin: 0; font-size: 15px; line-height: 1.75; text-align: justify; text-wrap: pretty;
+  column-count: 2; column-gap: var(--space-8); column-rule: 1px solid var(--color-divider);
+}
+.tdf-facts { background: var(--color-neutral-100); border-top: 3px solid var(--tdf-col) }
+.tdf-facts-list { display: flex; flex-direction: column; gap: var(--space-2); font-size: 13px }
+.tdf-fact { display: flex; justify-content: space-between; gap: var(--space-2) }
+.tdf-fact dt, .tdf-fact-key { color: var(--color-neutral-600) }
+.tdf-fact dd { margin: 0 }
+
+/* ── fiche view ─────────────────────────────────────────────────────── */
+
+.tdf-main-fiche { flex: 1; padding: var(--space-6) var(--space-8) 64px; max-width: 1080px; margin: 0 auto; width: 100% }
+.tdf-crumbs { display: flex; gap: var(--space-4); align-items: baseline; margin-bottom: var(--space-6) }
+.tdf-fiche-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin-bottom: var(--space-3) }
+.tdf-fiche-region { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--color-neutral-600) }
+.tdf-fiche-title { font-family: var(--font-heading); font-weight: 400; font-size: 60px; line-height: 1; margin: 0 0 var(--space-3); letter-spacing: .004em }
+.tdf-fiche-rule { width: 150px }
+
+.tdf-stats {
+  display: flex; flex-wrap: wrap; gap: var(--space-8); margin: 0 0 var(--space-8);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider);
+}
+.tdf-stat { display: flex; flex-direction: column; gap: 2px }
+.tdf-stat dt { font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: var(--color-neutral-600) }
+.tdf-stat dd { margin: 0; font-family: var(--font-heading); font-size: 19px; font-feature-settings: 'tnum' }
+
+.tdf-fiche-body { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 46px; align-items: start }
+.tdf-hist { margin: 0 0 var(--space-6); font-size: 15.5px; line-height: 1.78; text-align: justify; text-wrap: pretty }
+.tdf-steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-4) }
+.tdf-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: var(--space-3); align-items: baseline }
+.tdf-step-no { font-family: var(--font-heading); font-size: 27px; color: var(--tdf-col); border-bottom: 1px solid var(--color-divider); font-feature-settings: 'tnum' }
+.tdf-step-txt { font-size: 14.5px; line-height: 1.7; text-align: justify; text-wrap: pretty }
+
+.tdf-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3) }
+.tdf-gallery .plate {
+  aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center;
+  background: var(--color-neutral-200); font-size: 10px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--color-neutral-600); text-align: center; padding: var(--space-2);
+}
+
+.tdf-fiche-aside { display: flex; flex-direction: column; gap: var(--space-6); position: sticky; top: 88px }
+.tdf-ing-card { background: var(--tdf-tint); border-top: 3px solid var(--tdf-col) }
+.tdf-ing-list { display: flex; flex-direction: column; margin: 0 }
+.tdf-ing {
+  display: flex; justify-content: space-between; gap: var(--space-3);
+  padding: 7px 0; border-bottom: 1px solid var(--color-divider);
+  font-size: 13.5px; font-feature-settings: 'tnum';
+}
+.tdf-ing dd { margin: 0; color: var(--color-neutral-600); white-space: nowrap }
+
+.tdf-accords { display: flex; flex-direction: column; gap: var(--space-3) }
+.tdf-accord {
+  display: flex; flex-direction: column; gap: 2px;
+  padding-left: var(--space-3); border-left: 2px solid var(--tdf-dessert);
+}
+.tdf-accord-vin { font-family: var(--font-heading); font-size: 17px }
+.tdf-accord-note { font-size: 12.5px; line-height: 1.55; color: var(--color-neutral-700) }
+
+.tdf-pro { border-color: var(--color-accent-300) }
+.tdf-pro-list { display: flex; flex-direction: column; gap: var(--space-2); font-size: 13px; margin: 0 }
+.tdf-pro-item { display: flex; flex-direction: column; gap: 1px }
+.tdf-pro-item dt { color: var(--color-neutral-600); font-size: 11px; letter-spacing: .14em; text-transform: uppercase }
+.tdf-pro-item dd { margin: 0; line-height: 1.55 }
+
+.tdf-siblings { display: flex; flex-direction: column }
+.tdf-sibling {
+  display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-2);
+  padding: var(--space-2) var(--space-1);
+  background: none; border: 0; border-bottom: 1px solid var(--color-divider);
+  cursor: pointer; text-align: left;
+}
+.tdf-sibling:hover { background: var(--color-accent-100) }
+.tdf-sibling-name { font-family: var(--font-heading); font-size: 16px }
+.tdf-sibling-type { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-neutral-600) }
+
+/* ── footer ─────────────────────────────────────────────────────────── */
+
+.tdf-footer {
+  border-top: 1px solid var(--color-divider);
+  padding: var(--space-4) var(--space-8);
+  display: flex; justify-content: space-between; gap: var(--space-4);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--color-neutral-600);
+}
+
+/* ── responsive ─────────────────────────────────────────────────────── */
+
+@media (max-width: 1080px) {
+  .tdf-atlas { grid-template-columns: 1fr }
+  .tdf-aside { border-left: 0; border-top: 1px solid var(--color-divider) }
+  .tdf-fiche-body { grid-template-columns: 1fr; gap: var(--space-8) }
+  .tdf-fiche-aside { position: static }
+  .tdf-region-head { grid-template-columns: 1fr; gap: var(--space-6) }
+  .tdf-region-desc { column-count: 1 }
+}
+
+@media (max-width: 720px) {
+  .tdf-header { flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3) var(--space-4) }
+  .tdf-search { width: 100%; order: 3 }
+  .tdf-total { order: 4 }
+  .tdf-theme { order: 2 }
+  .tdf-spacer { display: none }
+  /* La marque doit pouvoir se comprimer, sinon elle prend toute la première
+     ligne et renvoie le bouton de thème seul sur la suivante. */
+  .tdf-brand { margin-right: auto; flex: 1 1 0; min-width: 0; flex-wrap: wrap; row-gap: 2px }
+  .tdf-main-narrow, .tdf-main-region, .tdf-main-fiche, .tdf-atlas-main { padding-inline: var(--space-4) }
+  .tdf-aside { padding-inline: var(--space-4) }
+
+  /* The atlas is the one element that cannot shrink gracefully: let it run
+     edge to edge and grow the medallions so the region names still set. */
+  .tdf-map { margin-inline: calc(var(--space-4) * -1); border-radius: 0; border-inline: 0 }
+  .tdf-pin { width: 19% }
+  .tdf-pin-sm { width: 16% }
+  .tdf-pin-name { font-size: 8.5px; letter-spacing: -0.01em }
+  .tdf-pin-count { font-size: 8px; letter-spacing: .08em }
+  .tdf-atlas-title { font-size: 34px }
+  .tdf-region-title { font-size: 38px }
+  .tdf-fiche-title { font-size: 40px }
+  .tdf-footer { flex-direction: column; gap: var(--space-2); padding-inline: var(--space-4) }
+  .tdf-gallery { grid-template-columns: 1fr }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tdf-enter { animation: none }
+}

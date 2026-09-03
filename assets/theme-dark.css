@@ -1,0 +1,164 @@
+/* Terroir de France — couche sombre.
+ *
+ * Classical est un système mono-thème, sur fond clair : plutôt que de le
+ * modifier (il doit rester synchronisable avec le projet Design), ce fichier
+ * ne redéfinit que ses *tokens*. Tout le reste — composants, espacements,
+ * type — continue de fonctionner tel quel.
+ *
+ * Le readme du système donne la direction pour un fond sombre : « un noir
+ * chaud, une nuance sous --color-neutral-900 », l'or en --color-accent-400,
+ * et une élévation faite d'une arête fine et d'une ombre ambiante plutôt que
+ * d'ombres portées.
+ *
+ * Les rampes neutre et accent sont *inversées* en valeur mais gardent leur
+ * rôle : -100 reste « le fond teinté », -800 reste « le texte sur ce fond ».
+ * Les classes n'ont donc pas à savoir dans quel thème elles sont.
+ *
+ * Trois états, comme il se doit : le choix explicite pose data-theme sur
+ * <html> et gagne dans les deux sens ; sans choix, on suit le système.
+ */
+
+:root { color-scheme: light }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) { color-scheme: dark }
+}
+:root[data-theme='dark'] { color-scheme: dark }
+
+/* Le corps de la palette, écrit une fois et appliqué aux deux sélecteurs. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #1a1917;
+    --color-surface: #262421;
+    --color-text: #ece8e2;
+    --color-accent: #d9a253;
+    --color-accent-2: #d09b52;
+    --color-divider: color-mix(in srgb, #ece8e2 18%, transparent);
+
+    --color-neutral-100: #232120;
+    --color-neutral-200: #2c2a27;
+    --color-neutral-300: #3b3835;
+    --color-neutral-400: #4f4c48;
+    --color-neutral-500: #7d7975;
+    --color-neutral-600: #979289;
+    --color-neutral-700: #b3ada5;
+    --color-neutral-800: #cdc7bf;
+    --color-neutral-900: #e6e1da;
+
+    --color-accent-100: #2b2216;
+    --color-accent-200: #3b2f1d;
+    --color-accent-300: #6d5228;
+    --color-accent-400: #e1ad66;
+    --color-accent-500: #d09a4e;
+    --color-accent-600: #f0c684;
+    --color-accent-700: #e1ad66;
+    --color-accent-800: #f0d4a4;
+    --color-accent-900: #f8e8cd;
+
+    --color-accent-2-100: #2b2216;
+    --color-accent-2-200: #3b2f1d;
+    --color-accent-2-300: #6a5029;
+    --color-accent-2-400: #dbaf70;
+    --color-accent-2-500: #c99d5c;
+    --color-accent-2-600: #edc488;
+    --color-accent-2-700: #dbaf70;
+    --color-accent-2-800: #eed6ac;
+    --color-accent-2-900: #f7e9d0;
+
+    /* L'élévation devient de l'obscurité ambiante, pas une ombre portée. */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .55);
+    --shadow-md: 0 3px 10px rgba(0, 0, 0, .6);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, .68);
+
+    /* Familles de produits et de régions : mêmes teintes, remontées en
+       clarté pour tenir sur le fond, et fonds teintés redescendus. */
+    --tdf-fromage: oklch(80% .095 78);      --tdf-fromage-t: oklch(26% .035 78);
+    --tdf-plat: oklch(75% .11 38);          --tdf-plat-t: oklch(26% .04 38);
+    --tdf-dessert: oklch(75% .095 350);     --tdf-dessert-t: oklch(26% .035 350);
+    --tdf-charcuterie: oklch(73% .105 20);  --tdf-charcuterie-t: oklch(26% .038 20);
+
+    --tdf-nordest: oklch(78% .10 65);
+    --tdf-ouest: oklch(75% .075 210);
+    --tdf-centre: oklch(75% .095 350);
+    --tdf-sudouest: oklch(75% .11 38);
+    --tdf-midi: oklch(77% .095 132);
+
+    /* Le tracé de la carte : un papier sombre, une côte dorée. */
+    --tdf-map-fill: oklch(24% .014 80);
+    --tdf-map-stroke: oklch(52% .04 80);
+
+    /* Le voile du dialogue s'appuie sur neutral-900, devenu clair : noir. */
+    --tdf-scrim: rgba(0, 0, 0, .62);
+  }
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #1a1917;
+  --color-surface: #262421;
+  --color-text: #ece8e2;
+  --color-accent: #d9a253;
+  --color-accent-2: #d09b52;
+  --color-divider: color-mix(in srgb, #ece8e2 18%, transparent);
+
+  --color-neutral-100: #232120;
+  --color-neutral-200: #2c2a27;
+  --color-neutral-300: #3b3835;
+  --color-neutral-400: #4f4c48;
+  --color-neutral-500: #7d7975;
+  --color-neutral-600: #979289;
+  --color-neutral-700: #b3ada5;
+  --color-neutral-800: #cdc7bf;
+  --color-neutral-900: #e6e1da;
+
+  --color-accent-100: #2b2216;
+  --color-accent-200: #3b2f1d;
+  --color-accent-300: #6d5228;
+  --color-accent-400: #e1ad66;
+  --color-accent-500: #d09a4e;
+  --color-accent-600: #f0c684;
+  --color-accent-700: #e1ad66;
+  --color-accent-800: #f0d4a4;
+  --color-accent-900: #f8e8cd;
+
+  --color-accent-2-100: #2b2216;
+  --color-accent-2-200: #3b2f1d;
+  --color-accent-2-300: #6a5029;
+  --color-accent-2-400: #dbaf70;
+  --color-accent-2-500: #c99d5c;
+  --color-accent-2-600: #edc488;
+  --color-accent-2-700: #dbaf70;
+  --color-accent-2-800: #eed6ac;
+  --color-accent-2-900: #f7e9d0;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .55);
+  --shadow-md: 0 3px 10px rgba(0, 0, 0, .6);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, .68);
+
+  --tdf-fromage: oklch(80% .095 78);      --tdf-fromage-t: oklch(26% .035 78);
+  --tdf-plat: oklch(75% .11 38);          --tdf-plat-t: oklch(26% .04 38);
+  --tdf-dessert: oklch(75% .095 350);     --tdf-dessert-t: oklch(26% .035 350);
+  --tdf-charcuterie: oklch(73% .105 20);  --tdf-charcuterie-t: oklch(26% .038 20);
+
+  --tdf-nordest: oklch(78% .10 65);
+  --tdf-ouest: oklch(75% .075 210);
+  --tdf-centre: oklch(75% .095 350);
+  --tdf-sudouest: oklch(75% .11 38);
+  --tdf-midi: oklch(77% .095 132);
+
+  --tdf-map-fill: oklch(24% .014 80);
+  --tdf-map-stroke: oklch(52% .04 80);
+
+  --tdf-scrim: rgba(0, 0, 0, .62);
+}
+
+/* Les deux endroits où un token ne suffit pas. */
+
+/* Le voile du dialogue est écrit en dur sur neutral-900 dans le système. */
+.dialog-backdrop { background: var(--tdf-scrim) }
+
+/* Le virage sépia des plaques vire au jaune sale sur fond sombre : on garde
+   le grain (désaturation, contraste) et on laisse tomber le sépia. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .plate { filter: saturate(.8) contrast(1.05) brightness(.92) }
+}
+:root[data-theme='dark'] .plate { filter: saturate(.8) contrast(1.05) brightness(.92) }

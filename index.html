@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terroir de France — Inventaire du patrimoine culinaire</title>
+<meta name="description" content="Atlas des spécialités régionales françaises : fromages, plats, desserts et charcuteries, région par région, avec recettes, accords et fiches professionnelles.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/design-system.css">
+<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="assets/theme-dark.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>&#127838;</text></svg>">
+<script>
+  /* Avant peinture : sans choix explicite on suit le système, et rien n'est posé. */
+  try {
+    var t = localStorage.getItem('tdf-theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+  } catch (e) {}
+</script>
+</head>
+<body>
+<div class="app">
+
+  <header class="tdf-header">
+    <button class="tdf-brand" data-nav="map" type="button">
+      <span class="tdf-brand-name">Terroir de France</span>
+      <span class="tdf-brand-sub">Inventaire du patrimoine culinaire</span>
+    </button>
+    <div class="tdf-spacer"></div>
+    <div class="tdf-search">
+      <input id="q" class="input" type="search" autocomplete="off"
+             placeholder="Spécialité, ingrédient, région…" aria-label="Rechercher une spécialité">
+      <button id="q-clear" class="tdf-search-clear" type="button" aria-label="Effacer la recherche" hidden>×</button>
+    </div>
+    <button class="btn btn-icon tdf-theme" id="theme" type="button" aria-pressed="false">
+      <!-- Lucide « moon » / « sun » -->
+      <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+    <span class="tdf-total" id="total-label"></span>
+  </header>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="tdf-footer">
+    <span>Terroir de France — prototype</span>
+    <span>D'après l'Inventaire du patrimoine culinaire de la France</span>
+  </footer>
+
+</div>
+<script type="module" src="src/app.js"></script>
+</body>
+</html>
