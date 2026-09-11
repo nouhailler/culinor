@@ -7,7 +7,7 @@
     "champs": {
       "id": "identifiant unique, minuscules, sans accent ni espace — ex. \"cassoulet\"",
       "n": "nom affiché, avec accents et majuscules — ex. \"Cassoulet\"",
-      "t": "exactement l'un de : \"Fromage\", \"Plat\", \"Dessert\", \"Charcuterie\"",
+      "t": "exactement l'un de : \"Fromage\", \"Plat\", \"Dessert\", \"Charcuterie\", \"Boisson\"",
       "niveau": "1 ou 2 (nombre, pas une chaîne) — voir niveau_1_vs_2 ci-dessus",
       "aop": "mention officielle si elle existe — ex. \"AOP 1976\", \"AOC 1925\", \"IGP Sud-Ouest\" — sinon \"—\"",
       "saison": "\"Toute l'année\", \"Hiver\", \"Été\", ou une fenêtre précise — ex. \"Octobre-mai\"",

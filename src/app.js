@@ -30,7 +30,7 @@ const PIN = {
   cor:  { x: 89, y: 87, small: true },
 };
 
-const TYPES = ['Tout', 'Fromage', 'Plat', 'Dessert', 'Charcuterie'];
+const TYPES = ['Tout', 'Fromage', 'Plat', 'Dessert', 'Charcuterie', 'Boisson'];
 
 /* Niveau : un second axe, orthogonal au type — « quelle nature de produit »
    contre « recette composée ou produit du terroir ». Le Niveau 3 (voir plus
@@ -137,7 +137,7 @@ rebuildAll();
 let customAppellations = loadCustomAppellations();
 rebuildAppellations();
 
-const KNOWN_TYPES = ['Fromage', 'Plat', 'Dessert', 'Charcuterie'];
+const KNOWN_TYPES = ['Fromage', 'Plat', 'Dessert', 'Charcuterie', 'Boisson'];
 const KNOWN_DIFFS = ['Simple', 'Technique', 'Expert', 'Affinage'];
 
 const slugify = (str) => String(str ?? '')

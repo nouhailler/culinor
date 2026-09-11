@@ -61,7 +61,7 @@ Niveau 1. Un plat ou un dessert est presque toujours Niveau 1.
 | --- | --- |
 | `id` | Identifiant unique, minuscules, sans accent ni espace : `cassoulet`, `tartenormande`. Je vérifie qu'il n'existe pas déjà (dans les deux gabarits). |
 | `n` | Nom affiché, avec accents et majuscules : `Cassoulet`. |
-| `t` | Exactement l'un de : `Fromage`, `Plat`, `Dessert`, `Charcuterie` — détermine la couleur et le filtre. |
+| `t` | Exactement l'un de : `Fromage`, `Plat`, `Dessert`, `Charcuterie`, `Boisson` — détermine la couleur et le filtre. |
 | `niveau` | `1` (spécialité culinaire) ou `2` (produit du terroir) — voir ci-dessus. |
 | `aop` | Mention officielle si elle existe : `AOP 1976`, `AOC 1925`, `IGP Sud-Ouest` — sinon `—`. |
 | `saison` | `Toute l'année`, `Hiver`, `Été`, ou une fenêtre précise : `Octobre-mai`, `Août-septembre`. |

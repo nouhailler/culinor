@@ -76,6 +76,7 @@
     --tdf-plat: oklch(75% .11 38);          --tdf-plat-t: oklch(26% .04 38);
     --tdf-dessert: oklch(75% .095 350);     --tdf-dessert-t: oklch(26% .035 350);
     --tdf-charcuterie: oklch(73% .105 20);  --tdf-charcuterie-t: oklch(26% .038 20);
+    --tdf-boisson: oklch(75% .095 300);     --tdf-boisson-t: oklch(26% .035 300);
 
     --tdf-nordest: oklch(78% .10 65);
     --tdf-ouest: oklch(75% .075 210);
@@ -138,6 +139,7 @@
   --tdf-plat: oklch(75% .11 38);          --tdf-plat-t: oklch(26% .04 38);
   --tdf-dessert: oklch(75% .095 350);     --tdf-dessert-t: oklch(26% .035 350);
   --tdf-charcuterie: oklch(73% .105 20);  --tdf-charcuterie-t: oklch(26% .038 20);
+  --tdf-boisson: oklch(75% .095 300);     --tdf-boisson-t: oklch(26% .035 300);
 
   --tdf-nordest: oklch(78% .10 65);
   --tdf-ouest: oklch(75% .075 210);
