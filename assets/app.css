@@ -63,12 +63,14 @@ button { font-family: inherit; color: inherit }
   background: none; border: 0; cursor: pointer;
   font-size: 15px; line-height: 1; color: var(--color-neutral-600); padding: 4px 6px;
 }
-.tdf-theme {
+/* Boutons ronds de l'en-tête — thème et paramètres partagent ce gabarit. */
+.tdf-icon-btn {
   flex: none; width: 32px; height: 32px; padding: 0;
   color: var(--color-neutral-600); border-color: transparent;
+  transition: color 0.15s ease, background-color 0.15s ease;
 }
-.tdf-theme:hover { color: var(--color-accent-700); background: color-mix(in srgb, var(--color-accent) 10%, transparent) }
-.tdf-theme svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6;
+.tdf-icon-btn:hover { color: var(--color-accent-700); background: color-mix(in srgb, var(--color-accent) 10%, transparent) }
+.tdf-icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.6;
   stroke-linecap: round; stroke-linejoin: round }
 /* Un seul des deux jeux d'icônes est visible : celui du thème vers lequel on bascule. */
 .tdf-theme .icon-moon { display: block }
@@ -86,6 +88,24 @@ button { font-family: inherit; color: inherit }
   font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
   color: var(--color-neutral-600); font-feature-settings: 'tnum'; white-space: nowrap;
 }
+
+/* ── paramètres : import de gabarit ────────────────────────────────── */
+
+.tdf-json-input {
+  font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12.5px;
+  min-height: 220px; white-space: pre;
+}
+.tdf-settings-errors {
+  border-color: var(--color-accent-300); background: var(--color-accent-100);
+}
+.tdf-settings-errors ul { margin: 0; padding-left: 1.2em; font-size: 13px; line-height: 1.6 }
+.tdf-settings-list { display: flex; flex-direction: column; margin: 0 0 var(--space-3) }
+.tdf-settings-row {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-2) var(--space-1); border-bottom: 1px solid var(--color-divider);
+}
+.tdf-settings-row-name { font-family: var(--font-heading); font-size: 15px }
+.tdf-settings-row-meta { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--color-neutral-600) }
 
 /* ── shared editorial furniture ─────────────────────────────────────── */
 
@@ -152,6 +172,7 @@ button { font-family: inherit; color: inherit }
 .tdf-atlas-lede {
   margin: 0 0 var(--space-6); max-width: 56ch; font-size: 14.5px; line-height: 1.7;
   text-align: justify; text-wrap: pretty; color: var(--color-neutral-800);
+  hyphens: auto;
 }
 .tdf-map {
   position: relative; aspect-ratio: 1 / .95; width: 100%; max-width: 820px; margin: 0 auto;
@@ -172,6 +193,7 @@ button { font-family: inherit; color: inherit }
   border: 1.5px solid var(--tdf-col); background: color-mix(in srgb, var(--color-bg) 90%, transparent);
   cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 3px; padding: 8px;
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
 }
 .tdf-pin:hover { box-shadow: var(--shadow-md); background: color-mix(in srgb, var(--tdf-col) 12%, var(--color-bg)) }
 .tdf-pin-sm { width: 13.5% }
@@ -195,6 +217,7 @@ button { font-family: inherit; color: inherit }
   cursor: pointer; border-width: 1px; border-style: solid;
   font-feature-settings: 'tnum';
   border-color: var(--tdf-col); color: var(--tdf-fg); background: var(--tdf-bg);
+  transition: box-shadow 0.15s ease, background-color 0.15s ease;
 }
 .tdf-type:hover { box-shadow: var(--shadow-sm) }
 .tdf-type[aria-pressed='true'] { font-weight: 600 }
@@ -208,6 +231,7 @@ button { font-family: inherit; color: inherit }
   padding: var(--space-2) var(--space-1);
   background: none; border: 0; border-bottom: 1px solid var(--color-divider);
   cursor: pointer; text-align: left; width: 100%;
+  transition: background-color 0.15s ease;
 }
 .tdf-region-row:hover { background: color-mix(in srgb, var(--color-neutral-300) 45%, transparent) }
 .tdf-region-row-name { display: flex; align-items: center; gap: var(--space-2) }
@@ -223,6 +247,7 @@ button { font-family: inherit; color: inherit }
 .tdf-region-desc {
   margin: 0; font-size: 15px; line-height: 1.75; text-align: justify; text-wrap: pretty;
   column-count: 2; column-gap: var(--space-8); column-rule: 1px solid var(--color-divider);
+  hyphens: auto;
 }
 .tdf-facts { background: var(--color-neutral-100); border-top: 3px solid var(--tdf-col) }
 .tdf-facts-list { display: flex; flex-direction: column; gap: var(--space-2); font-size: 13px }
@@ -249,11 +274,11 @@ button { font-family: inherit; color: inherit }
 .tdf-stat dd { margin: 0; font-family: var(--font-heading); font-size: 19px; font-feature-settings: 'tnum' }
 
 .tdf-fiche-body { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 46px; align-items: start }
-.tdf-hist { margin: 0 0 var(--space-6); font-size: 15.5px; line-height: 1.78; text-align: justify; text-wrap: pretty }
+.tdf-hist { margin: 0 0 var(--space-6); font-size: 15.5px; line-height: 1.78; text-align: justify; text-wrap: pretty; hyphens: auto }
 .tdf-steps { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--space-4) }
 .tdf-step { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: var(--space-3); align-items: baseline }
 .tdf-step-no { font-family: var(--font-heading); font-size: 27px; color: var(--tdf-col); border-bottom: 1px solid var(--color-divider); font-feature-settings: 'tnum' }
-.tdf-step-txt { font-size: 14.5px; line-height: 1.7; text-align: justify; text-wrap: pretty }
+.tdf-step-txt { font-size: 14.5px; line-height: 1.7; text-align: justify; text-wrap: pretty; hyphens: auto }
 
 .tdf-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3) }
 .tdf-gallery .plate {
@@ -292,6 +317,7 @@ button { font-family: inherit; color: inherit }
   padding: var(--space-2) var(--space-1);
   background: none; border: 0; border-bottom: 1px solid var(--color-divider);
   cursor: pointer; text-align: left;
+  transition: background-color 0.15s ease;
 }
 .tdf-sibling:hover { background: var(--color-accent-100) }
 .tdf-sibling-name { font-family: var(--font-heading); font-size: 16px }
@@ -321,7 +347,7 @@ button { font-family: inherit; color: inherit }
   .tdf-header { flex-wrap: wrap; gap: var(--space-3); padding: var(--space-3) var(--space-4) }
   .tdf-search { width: 100%; order: 3 }
   .tdf-total { order: 4 }
-  .tdf-theme { order: 2 }
+  .tdf-icon-btn { order: 2 }
   .tdf-spacer { display: none }
   /* La marque doit pouvoir se comprimer, sinon elle prend toute la première
      ligne et renvoie le bouton de thème seul sur la suivante. */
@@ -345,4 +371,5 @@ button { font-family: inherit; color: inherit }
 
 @media (prefers-reduced-motion: reduce) {
   .tdf-enter { animation: none }
+  *, *::before, *::after { transition: none !important }
 }

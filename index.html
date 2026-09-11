@@ -34,7 +34,14 @@
              placeholder="Spécialité, ingrédient, région…" aria-label="Rechercher une spécialité">
       <button id="q-clear" class="tdf-search-clear" type="button" aria-label="Effacer la recherche" hidden>×</button>
     </div>
-    <button class="btn btn-icon tdf-theme" id="theme" type="button" aria-pressed="false">
+    <button class="btn btn-icon tdf-icon-btn" id="settings-btn" type="button" aria-haspopup="dialog" title="Paramètres">
+      <!-- Lucide « settings » -->
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.08a2 2 0 0 1 1 1.74v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+    <button class="btn btn-icon tdf-icon-btn tdf-theme" id="theme" type="button" aria-pressed="false">
       <!-- Lucide « moon » / « sun » -->
       <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
@@ -48,6 +55,8 @@
     <span>Terroir de France — prototype</span>
     <span>D'après l'Inventaire du patrimoine culinaire de la France</span>
   </footer>
+
+  <div id="settings-root"></div>
 
 </div>
 <script type="module" src="src/app.js"></script>

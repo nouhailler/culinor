@@ -1,0 +1,31 @@
+{
+  "region": "idf",
+  "fiches": [
+    {
+      "id": "",
+      "n": "",
+      "t": "Plat",
+      "niveau": 1,
+      "aop": "—",
+      "saison": "",
+      "temps": "",
+      "cuisson": "",
+      "diff": "Simple",
+      "portions": "",
+      "teaser": "",
+      "hist": "",
+      "ing": [
+        { "nom": "", "qte": "" }
+      ],
+      "etapes": [
+        ""
+      ],
+      "accords": [
+        { "vin": "", "note": "" }
+      ],
+      "sourcing": "",
+      "allergenes": "",
+      "cout": ""
+    }
+  ]
+}
