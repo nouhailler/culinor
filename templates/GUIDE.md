@@ -21,8 +21,13 @@ servir ensuite :
   voient pas, et il disparaît si le site vide son stockage. Le bouton
   *Copier le code pour data.js* dans la même fenêtre donne le code prêt à
   coller dans le dépôt — c'est l'étape suivante pour le rendre permanent.
-- **Par le chat** — transmets-moi directement le fichier rempli : je valide
-  et je fusionne dans [`src/data.js`](../src/data.js).
+- **Par le chat, ou via une autre IA** — transmets le fichier rempli, à moi
+  ou à un autre outil (OpenRouter, etc.). Chaque gabarit porte une clé
+  `"_instructions"` qui documente tous les champs directement dans le
+  fichier — pas besoin de fournir ce guide en plus, le JSON se suffit à
+  lui-même. Cette clé est ignorée à l'import, à garder ou supprimer selon
+  l'envie. Si c'est moi qui reçois le fichier rempli, je valide et je
+  fusionne dans [`src/data.js`](../src/data.js).
 
 Un fichier = une région = autant d'entrées que tu veux dedans.
 
