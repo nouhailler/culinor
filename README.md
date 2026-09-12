@@ -1,9 +1,12 @@
 # Terroir de France
 
-Inventaire du patrimoine culinaire français : un atlas des treize régions
-métropolitaines et **31 fiches** — fromages, plats, desserts et charcuteries —
-avec histoire, ingrédients, préparation, accords mets & vins et repères
-professionnels.
+Inventaire du patrimoine culinaire français : un atlas de quatorze régions
+(les treize régions métropolitaines et une entrée « France entière » pour les
+classiques sans ancrage local exclusif) et **205 fiches** — fromages, plats,
+desserts, charcuteries et boissons — avec histoire, ingrédients, préparation,
+accords mets & vins et repères professionnels. Voir [CONTEXT.md](CONTEXT.md)
+pour l'état détaillé de l'inventaire et [CHANGELOG.md](CHANGELOG.md) pour
+l'historique des ajouts.
 
 Implémentation de la maquette Claude Design
 [`Terroir de France.dc.html`](design/) (projet `6267fd19-0b0f-4524-8e22-5a55a10f144e`),
@@ -30,9 +33,10 @@ index.html                  Coque : en-tête collant, champ de recherche, pied d
 assets/design-system.css    Design system Classical (tokens + composants), repris tel quel
 assets/app.css              Couche applicative : les styles inline de la maquette, nommés
 assets/theme-dark.css       Couche sombre : redéfinit les tokens, pas les composants
-src/data.js                 REGIONS · SPECS · TEASERS · COL · FAM — données reprises verbatim
+src/data.js                 REGIONS · SPECS · TEASERS · COL · FAM · APPELLATIONS — les données
 src/app.js                  État, routage par hash et rendu des quatre vues
 design/                     La maquette d'origine et son runtime, pour référence
+templates/                  Gabarits JSON pour enrichir l'inventaire — voir templates/GUIDE.md
 ```
 
 ## Les quatre vues
@@ -110,6 +114,9 @@ const OPTIONS = {
 
 ## Données
 
-31 fiches réparties sur 13 régions, reprises intégralement de la maquette
-(aucune n'a été inventée ni retouchée). Toute correction éditoriale se fait
-dans `src/data.js`.
+205 fiches réparties sur 14 régions (voir [CONTEXT.md](CONTEXT.md) pour le
+détail par région et par type). Les premières fiches viennent de la maquette
+d'origine ; l'inventaire s'enrichit depuis par paquets JSON remplis via les
+gabarits de `templates/` (voir `templates/GUIDE.md`), validés puis fusionnés
+dans `src/data.js` — jamais de fait inventé (AOP, date, origine) : une
+information non vérifiable est signalée plutôt qu'inventée.
