@@ -562,9 +562,10 @@ function viewMap() {
     <div class="tdf-atlas">
       <section class="tdf-atlas-main">
         <p class="tdf-kicker">Atlas des régions</p>
-        <h1 class="tdf-atlas-title">Les treize terroirs</h1>
+        <h1 class="tdf-atlas-title">Les terroirs de France</h1>
         <p class="tdf-atlas-lede">Chaque médaillon porte une région administrative et le nombre de
         fiches inventoriées — produits du terroir, plats emblématiques, desserts et charcuteries.
+        Une entrée à part, France entière, réunit les classiques nationaux sans médaillon propre.
         Le filtre ci-contre restreint le décompte au type de produit sélectionné.</p>
 
         <div class="tdf-map">

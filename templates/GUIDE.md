@@ -33,9 +33,18 @@ Un fichier = une région = autant d'entrées que tu veux dedans.
 
 ## `region`
 
-L'identifiant d'une des 13 régions existantes (pas de nouvelle région à créer
-ici — l'atlas est fixé aux 13 régions métropolitaines) : `hdf`, `nor`, `idf`,
-`ge`, `bre`, `pdl`, `cvl`, `bfc`, `na`, `ara`, `occ`, `paca`, `cor`.
+L'identifiant d'une des 13 régions existantes (pas de nouvelle région
+géographique à créer ici — l'atlas est fixé aux 13 régions métropolitaines) :
+`hdf`, `nor`, `idf`, `ge`, `bre`, `pdl`, `cvl`, `bfc`, `na`, `ara`, `occ`,
+`paca`, `cor`.
+
+Il existe une 14ᵉ entrée, `national` (« France entière »), réservée aux
+classiques dont l'identité dépasse un terroir précis — sans appellation ni
+ancrage local qui les rattache à une région plutôt qu'à une autre (ex. le
+palet de dames). Elle n'a pas de médaillon sur la carte, mais figure dans la
+liste des régions et a sa propre page. À utiliser avec parcimonie : la
+plupart des spécialités ont une vraie région d'origine, même quand leur
+popularité a débordé sur le reste du pays.
 
 ## Spécialités & produits (`gabarit-specialites.json`)
 
